@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/adip47/clouraft.git
+    repoURL: https://github.com/adip47/cloudraft.git
     targetRevision: HEAD
     path: helm/metrics-app
     helm:
