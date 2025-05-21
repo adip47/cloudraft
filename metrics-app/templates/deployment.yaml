@@ -1,12 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "metrics-app.fullname" . }}
+  labels:
+    {{- include "metrics-app.labels" . | nindent 4 }}
 spec:
-  containers:
-    - name: metrics-app
-      image: ghcr.io/cloudraftio/metrics-app:1.4
-      ports:
-        - containerPort: 8080
-      env:
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: metrics-app-secret
-              key: PASSWORD
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "metrics-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "metrics-app.name" . }}
+    spec:
+      containers:
+        - name: metrics-app
+          image: ghcr.io/cloudraftio/metrics-app:1.4
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: metrics-app-secret
+                  key: PASSWORD
