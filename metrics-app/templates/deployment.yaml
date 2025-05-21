@@ -1,0 +1,8 @@
+        env:
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.env.passwordSecretName }}
+              key: {{ .Values.env.passwordKey }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
