@@ -1,8 +1,12 @@
-        env:
+spec:
+  containers:
+    - name: metrics-app
+      image: ghcr.io/cloudraftio/metrics-app:1.4
+      ports:
+        - containerPort: 8080
+      env:
         - name: PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.env.passwordSecretName }}
-              key: {{ .Values.env.passwordKey }}
-        ports:
-        - containerPort: {{ .Values.containerPort }}
+              name: metrics-app-secret
+              key: PASSWORD
